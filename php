@@ -21,7 +21,7 @@ first_argument="$1"
 hostname=""
 port=""
 port_forward=""
-php_argument=$first_argument
+php_argument=$@
 
 # Check if the -S option is present
 if [[ "$first_argument" == *"-S"* ]]; then
@@ -38,4 +38,4 @@ if [[ "$first_argument" == *"-S"* ]]; then
     php_argument="-S $hostname:$port"
 fi
 
-docker run --rm -it --workdir /app $port_forward -v $(pwd):/app $php_image php $php_argument
+docker run --rm -it --workdir /app $port_forward -v $(pwd):/app $php_image php "$php_argument"
